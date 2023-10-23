@@ -18,13 +18,6 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "iam_role_permissions_boundary" {
-  description = "ARN of a permissions boundary policy to use when creating IAM roles"
-  type        = string
-  default     = null
-}
-
 variable "priv_role_name" {
   description = "The name of the rolesanywhere profile to create"
   type        = string
@@ -46,11 +39,11 @@ variable "priv_users" {
   ]
 }
 
-variable "standard_users" {
-  description = "list of users to add to the standard role"
-  type        = list(string)
-  default = [
-    "junk",
-    "not.real"
-  ]
-}
+# variable "standard_users" {
+#   description = "list of users to add to the standard role"
+#   type        = list(string)
+#   default = [
+#     "junk",
+#     "not.real"
+#   ]
+# }

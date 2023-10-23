@@ -1,5 +1,5 @@
 data "aws_partition" "current" {}
-data "aws_caller_identity" "current" {}
+# data "aws_caller_identity" "current" {}
 
 locals {
   # Add randomness to names to avoid collisions when multiple users are using this example
@@ -11,8 +11,8 @@ locals {
       Repo         = "https://github.com/defenseunicorns/terraform-aws-rolesanywhere"
     }
   )
-  account_id = data.aws_caller_identity.current.account_id
-  partition  = data.aws_partition.current.partition
+  # account_id = data.aws_caller_identity.current.account_id
+  partition = data.aws_partition.current.partition
 }
 
 # deal with certificate data
