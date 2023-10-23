@@ -17,4 +17,4 @@ jobs:
       checks: |-
         checks:
           - context: 'e2e-tests'
-          - context: 'pre-commit'
+          - context: 'pre-commit-checks'
