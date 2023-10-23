@@ -10,11 +10,15 @@ import (
 	teststructure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
-func TestExamplesCompleteInsecure(t *testing.T) {
+func TestExamplesCompleteCommon(t *testing.T) {
 	t.Parallel()
+
+	// Generate a random hex string to use as the name prefix for name conflicts
+	randomHex := utils.GenerateRandomHex(2)
 
 	// Set the TF_VAR_region to us-east-2 if it's not already set
 	utils.SetDefaultEnvVar("TF_VAR_region", "us-east-2")
+	utils.SetDefaultEnvVar("TF_VAR_name_prefix", "ci-"+randomHex)
 
 	tempFolder := teststructure.CopyTerraformFolderToTemp(t, "../..", "examples/complete")
 	terraformOptions := &terraform.Options{

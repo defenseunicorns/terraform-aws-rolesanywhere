@@ -1,13 +1,8 @@
 data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
 
-resource "random_id" "default" {
-  byte_length = 2
-}
-
 locals {
   # Add randomness to names to avoid collisions when multiple users are using this example
-  vpc_name = "${var.name_prefix}-${lower(random_id.default.hex)}"
   tags = merge(
     var.tags,
     {
@@ -46,11 +41,16 @@ data "tls_certificate" "dod_cert" {
   content = file("${local.pem_file_dir}/${each.key}")
 }
 
+# only modifying the keys in this map for ci purposes to give random trust anchor names, in a real world scenario you can just use data.tls_certificate.dod_cert directly
+locals {
+  updated_cert_map = { for k, v in data.tls_certificate.dod_cert : "${var.name_prefix}-${k}" => v }
+}
+
 # feed the trust anchor arns into the rolesanywhere trust anchors module
 module "iam_rolesanywhere_trust_anchors" {
   source = "../../modules/iam-rolesanywhere-trust-anchors"
 
-  certificates = data.tls_certificate.dod_cert
+  certificates = local.updated_cert_map
 }
 
 # ceate role
@@ -124,7 +124,7 @@ data "aws_iam_policy_document" "cac_role_trust_relationship_priv_users" {
 }
 
 resource "aws_iam_role" "priv" {
-  name               = var.priv_role_name
+  name               = "${var.name_prefix}-${var.priv_role_name}"
   assume_role_policy = data.aws_iam_policy_document.cac_role_trust_relationship_priv_users.json
   tags               = var.tags
 }
@@ -136,8 +136,8 @@ resource "aws_iam_role_policy_attachment" "priv-attach" {
 
 # create rolesanywhere profile
 
-resource "aws_rolesanywhere_profile" "priviliged" {
-  name      = var.priv_rolesanywhere_profile_name
+resource "aws_rolesanywhere_profile" "privileged" {
+  name      = "${var.name_prefix}-${var.priv_rolesanywhere_profile_name}"
   role_arns = [aws_iam_role.priv.arn]
   enabled   = true
 

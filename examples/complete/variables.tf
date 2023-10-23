@@ -40,11 +40,17 @@ variable "priv_rolesanywhere_profile_name" {
 variable "priv_users" {
   description = "list of users to add to the admin role"
   type        = list(string)
-  default     = []
+  default = [
+    "junk",
+    "not.real"
+  ]
 }
 
 variable "standard_users" {
   description = "list of users to add to the standard role"
   type        = list(string)
-  default     = []
+  default = [
+    "junk",
+    "not.real"
+  ]
 }
