@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# # This script should be sourced and not run as a shell script as it is setting environment variables
-# # To run `. ./aws_login_rolesanywhere.sh <aws_access_key> <aws_secret_access_key> <aws_default_region> <aws_account_number> <aws_iam_role> <aws_username>`
-# # This will give you a one hour session in the account of choice
-# # It's recommended to create an alias to run this script vs manually entering the inputs each time
+# This script should be sourced and not run as a shell script as it is setting environment variables
+# This will give you a one hour session in the account of choice
+# It's recommended to create an alias to run this script vs manually entering the inputs each time
 
 # see https://github.com/aws/rolesanywhere-credential-helper?tab=readme-ov-file#credential-process for more info
 
@@ -110,4 +109,3 @@ echo "$cred" | jq .
 export AWS_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId)
 export AWS_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey)
 export AWS_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken)
-# export AWS_DEFAULT_REGION="us-gov-west-1"
