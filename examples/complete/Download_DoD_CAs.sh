@@ -33,8 +33,19 @@ ZIP_URL="https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/unclass-certifi
 # Download the ZIP file
 curl "$ZIP_URL" -o "$CERT_DIR/dod_certificates.zip"
 
+# List the contents of the ZIP file and extract the desired filename
+UNZIP_OUT=$(unzip -l "$CERT_DIR/dod_certificates.zip")
+FILENAME=$(echo $UNZIP_OUT | grep '_dod_der.p7b' | awk '{print $4}')
+
+# Check if the file was found
+if [ -z "$FILENAME" ]; then
+    echo "Error: Matching p7b file not found in ZIP archive, see:"
+    echo "$UNZIP_OUT"
+    exit 1
+fi
+
 # Unzip the ZIP file
-unzip -u -j "$CERT_DIR/dod_certificates.zip" 'certificates_pkcs7_v5_12_dod/certificates_pkcs7_v5_12_dod_pem.p7b' -d "$CERT_DIR"
+unzip -u -j "$CERT_DIR/dod_certificates.zip" "$FILENAME" -d "$CERT_DIR"
 
 # Convert PKCS7 to individual certificates and output them to separate files
 openssl pkcs7 -in "$CERT_DIR/certificates_pkcs7_v5_12_dod_pem.p7b" -print_certs | \
