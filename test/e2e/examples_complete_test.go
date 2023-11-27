@@ -44,6 +44,10 @@ func TestExamplesCompleteCommon(t *testing.T) {
 
 	// Set up the infra
 	teststructure.RunTestStage(t, "SETUP", func() {
+		// first time to init pems
+		terraform.InitAndApply(t, terraformOptions)
+
+		// second time to create the trust anchors
 		terraform.InitAndApply(t, terraformOptions)
 	})
 

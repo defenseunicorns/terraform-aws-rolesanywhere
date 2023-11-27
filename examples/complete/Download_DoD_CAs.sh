@@ -33,11 +33,26 @@ ZIP_URL="https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/unclass-certifi
 # Download the ZIP file
 curl "$ZIP_URL" -o "$CERT_DIR/dod_certificates.zip"
 
+# List the contents of the ZIP file and extract the desired filename
+UNZIP_OUT=$(unzip -l "$CERT_DIR/dod_certificates.zip")
+FILENAME=$(printf "%s\n" "$UNZIP_OUT" | grep '_dod_der.p7b' | awk '{print $4}')
+P7BBASENAME=$(basename "$FILENAME")
+
+# Check if the file was found
+if [ -z "$FILENAME" ]; then
+    echo "Error: Matching p7b file not found in ZIP archive, see:"
+    printf "%s\n" "$UNZIP_OUT"
+    exit 1
+fi
+
 # Unzip the ZIP file
-unzip -u -j "$CERT_DIR/dod_certificates.zip" 'certificates_pkcs7_v5_12_dod/certificates_pkcs7_v5_12_dod_pem.p7b' -d "$CERT_DIR"
+unzip -u -j "$CERT_DIR/dod_certificates.zip" "$FILENAME" -d "$CERT_DIR"
+
+# Convert from DER to PEM format
+openssl pkcs7 -in "$CERT_DIR/$P7BBASENAME" -inform DER -outform PEM -out "$CERT_DIR/converted.pem"
 
 # Convert PKCS7 to individual certificates and output them to separate files
-openssl pkcs7 -in "$CERT_DIR/certificates_pkcs7_v5_12_dod_pem.p7b" -print_certs | \
+openssl pkcs7 -in "$CERT_DIR/converted.pem" -print_certs | \
   $AWK_CMD -v RS='\n\n' -v ORS='\n\n' '/CN = DOD ID CA-[0-9]+/' | \
   $AWK_CMD -v certDir="$CERT_DIR" -v RS='\n\n' -v ORS='\n\n' '{
     match($0, /CN = DOD ID CA-([0-9]+)/, arr);
@@ -55,4 +70,4 @@ for pem_file in "$CERT_DIR"/*.pem; do
 done
 
 # Cleanup: Remove the ZIP file and temporary bundle
-rm $CERT_DIR/dod_certificates.zip $CERT_DIR/certificates_pkcs7_v5_12_dod_pem.p7b
+rm -rf "$CERT_DIR/dod_certificates.zip" "$CERT_DIR/$P7BBASENAME" "$CERT_DIR/converted.pem"
