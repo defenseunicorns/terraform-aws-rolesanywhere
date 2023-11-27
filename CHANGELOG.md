@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.2](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.1...v0.0.2) (2023-11-27)
+
+
+### Miscellaneous Chores
+
+* remove uds references ([#8](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/8)) ([793c1db](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/793c1dbc215fa3ffff17f0df657c1d73a322318f))
+
+
+### Continuous Integration
+
+* update renovate window ([#10](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/10)) ([09c8a29](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/09c8a29a1181085062146b3e97fc1874f543e899))
+
 ## 0.0.1 (2023-10-26)
 
 
