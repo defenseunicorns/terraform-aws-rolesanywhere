@@ -1,6 +1,10 @@
 data "aws_partition" "current" {}
 # data "aws_caller_identity" "current" {}
 
+resource "random_id" "default" {
+  byte_length = 2
+}
+
 locals {
   # Add randomness to names to avoid collisions when multiple users are using this example
   tags = merge(
@@ -48,7 +52,7 @@ locals {
 
 # feed the trust anchor arns into the rolesanywhere trust anchors module
 module "iam_rolesanywhere_trust_anchors" {
-  source = "../../modules/iam-rolesanywhere-trust-anchors"
+  source = "../../"
 
   certificates = local.updated_cert_map
 }
@@ -124,7 +128,7 @@ data "aws_iam_policy_document" "cac_role_trust_relationship_priv_users" {
 }
 
 resource "aws_iam_role" "priv" {
-  name               = "${var.name_prefix}-${var.priv_role_name}"
+  name               = "${var.name_prefix}-${var.priv_role_name}-${lower(random_id.default.hex)}"
   assume_role_policy = data.aws_iam_policy_document.cac_role_trust_relationship_priv_users.json
   tags               = var.tags
 }
@@ -137,7 +141,7 @@ resource "aws_iam_role_policy_attachment" "priv-attach" {
 # create rolesanywhere profile
 
 resource "aws_rolesanywhere_profile" "privileged" {
-  name      = "${var.name_prefix}-${var.priv_rolesanywhere_profile_name}"
+  name      = "${var.name_prefix}-${var.priv_rolesanywhere_profile_name}-${lower(random_id.default.hex)}"
   role_arns = [aws_iam_role.priv.arn]
   enabled   = true
 

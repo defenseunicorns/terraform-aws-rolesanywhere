@@ -1,7 +1,3 @@
-
-# examples/complete
-
-
 # examples/complete
 
 This example deploys AWS rolesanywhere for a pattern of using it DoD cac authentication.
@@ -75,7 +71,7 @@ source ./aws_login_rolesanywhere.sh \
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_rolesanywhere_trust_anchors"></a> [iam\_rolesanywhere\_trust\_anchors](#module\_iam\_rolesanywhere\_trust\_anchors) | ../../modules/iam-rolesanywhere-trust-anchors | n/a |
+| <a name="module_iam_rolesanywhere_trust_anchors"></a> [iam\_rolesanywhere\_trust\_anchors](#module\_iam\_rolesanywhere\_trust\_anchors) | ../../ | n/a |
 
 ## Resources
 
