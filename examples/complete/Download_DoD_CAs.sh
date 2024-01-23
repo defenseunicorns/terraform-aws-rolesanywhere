@@ -31,7 +31,7 @@ mkdir -p "$SCRIPT_PATH/ignore/certificates"
 ZIP_URL="https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/unclass-certificates_pkcs7_DoD.zip"
 
 # Download the ZIP file
-curl "$ZIP_URL" -o "$CERT_DIR/dod_certificates.zip"
+curl $ZIP_URL -o $CERT_DIR/dod_certificates.zip
 
 # List the contents of the ZIP file and extract the desired filename
 UNZIP_OUT=$(unzip -l "$CERT_DIR/dod_certificates.zip")
