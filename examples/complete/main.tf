@@ -22,8 +22,8 @@ locals {
 # deal with certificate data
 
 locals {
-  pem_file_dir = "${path.module}/ignore/certificates"
-  pem_files    = fileset("${path.module}/${local.pem_file_dir}", "*.pem")
+  pem_file_dir = "./ignore/certificates"
+  pem_files    = fileset("${local.pem_file_dir}", "*.pem")
 }
 
 # run script to download certificates and extract DoD ID PEMs
