@@ -1,7 +1,3 @@
-
-# examples/complete
-
-
 # examples/complete
 
 This example deploys AWS rolesanywhere for a pattern of using it DoD cac authentication.
@@ -69,13 +65,14 @@ source ./aws_login_rolesanywhere.sh \
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.62.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | >= 3.2.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.1.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0.4 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_rolesanywhere_trust_anchors"></a> [iam\_rolesanywhere\_trust\_anchors](#module\_iam\_rolesanywhere\_trust\_anchors) | ../../modules/iam-rolesanywhere-trust-anchors | n/a |
+| <a name="module_iam_rolesanywhere_trust_anchors"></a> [iam\_rolesanywhere\_trust\_anchors](#module\_iam\_rolesanywhere\_trust\_anchors) | ../../ | n/a |
 
 ## Resources
 
@@ -85,6 +82,7 @@ source ./aws_login_rolesanywhere.sh \
 | [aws_iam_role_policy_attachment.priv-attach](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_rolesanywhere_profile.privileged](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rolesanywhere_profile) | resource |
 | [null_resource.download_dod_certs](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [random_id.default](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [aws_iam_policy.administrator_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy) | data source |
 | [aws_iam_policy_document.cac_role_trust_relationship_priv_users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |

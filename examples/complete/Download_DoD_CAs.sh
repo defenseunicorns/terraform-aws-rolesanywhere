@@ -31,7 +31,7 @@ mkdir -p "$SCRIPT_PATH/ignore/certificates"
 ZIP_URL="https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/unclass-certificates_pkcs7_DoD.zip"
 
 # Download the ZIP file
-curl "$ZIP_URL" -o "$CERT_DIR/dod_certificates.zip"
+curl $ZIP_URL -o $CERT_DIR/dod_certificates.zip
 
 # List the contents of the ZIP file and extract the desired filename
 UNZIP_OUT=$(unzip -l "$CERT_DIR/dod_certificates.zip")
@@ -53,9 +53,9 @@ openssl pkcs7 -in "$CERT_DIR/$P7BBASENAME" -inform DER -outform PEM -out "$CERT_
 
 # Convert PKCS7 to individual certificates and output them to separate files
 openssl pkcs7 -in "$CERT_DIR/converted.pem" -print_certs | \
-  $AWK_CMD -v RS='\n\n' -v ORS='\n\n' '/CN = DOD ID CA-[0-9]+/' | \
+  $AWK_CMD -v RS='\n\n' -v ORS='\n\n' '/CN=DOD ID CA-[0-9]+/' | \
   $AWK_CMD -v certDir="$CERT_DIR" -v RS='\n\n' -v ORS='\n\n' '{
-    match($0, /CN = DOD ID CA-([0-9]+)/, arr);
+    match($0, /CN=DOD ID CA-([0-9]+)/, arr);
     if(arr[1] != "") {
       filename = sprintf("DOD_ID_CA_%s.pem", arr[1]);
       print $0 > (certDir "/" filename);

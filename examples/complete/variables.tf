@@ -38,12 +38,3 @@ variable "priv_users" {
     "not.real"
   ]
 }
-
-# variable "standard_users" {
-#   description = "list of users to add to the standard role"
-#   type        = list(string)
-#   default = [
-#     "junk",
-#     "not.real"
-#   ]
-# }
