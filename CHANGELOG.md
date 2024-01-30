@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.2](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.1...v0.0.2) (2024-01-30)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump golang.org/x/crypto from 0.14.0 to 0.17.0 ([#12](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/12)) ([09b3d03](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/09b3d03681ba65f7fd5d769961dfc6c9c308d2e3))
+* remove uds references ([#8](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/8)) ([793c1db](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/793c1dbc215fa3ffff17f0df657c1d73a322318f))
+
+
+### Continuous Integration
+
+* renovate window update and vuln handling ([#13](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/13)) ([3768938](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/3768938b8a2667063681f650986c50f17f0d8698))
+* update renovate window ([#10](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/10)) ([09c8a29](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/09c8a29a1181085062146b3e97fc1874f543e899))
+* update renovate window ([#11](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/11)) ([8192bff](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/8192bff801eafcffb280c73ea50235194d5b25a8))
+
 ## 0.0.1 (2023-10-26)
 
 
