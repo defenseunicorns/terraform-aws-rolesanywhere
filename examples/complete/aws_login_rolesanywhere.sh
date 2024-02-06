@@ -6,7 +6,7 @@
 
 # see https://github.com/aws/rolesanywhere-credential-helper?tab=readme-ov-file#credential-process for more info
 
-unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER AWS_USERNAME AWS_IAM_ROLE
+unset AWS_PROFILE AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER AWS_USERNAME AWS_IAM_ROLE
 
 echo -e "Starting script with $# arguments: $@\n"
 
@@ -74,6 +74,28 @@ while (("$#")); do
       exit 1
     fi
     ;;
+    # aws account number
+  --aws-account-number)
+    if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
+    AWS_ACCOUNT_NUMBER=$2
+    shift 2
+    else
+      echo "Error: Argument for $1 is missing" >&2
+      help
+      exit 1
+    fi
+    ;;
+    # aws default region
+  --aws-default-region)
+    if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
+    AWS_DEFAULT_REGION=$2
+    shift 2
+    else
+      echo "Error: Argument for $1 is missing" >&2
+      help
+      exit 1
+    fi
+    ;;
   # help message
   -h | --help)
     help
@@ -103,14 +125,15 @@ cred=$(aws_signing_helper \
   --cert-selector "Key=x509Serial,Value=$PIV_CERT_SERIAL" \
   --trust-anchor-arn "$TRUST_ANCHOR_ARN" \
   --profile-arn "$PROFILE_ARN" \
-  --role-arn "$ROLE_ARN" \ 
-  --session-duration 3599)
+  --role-arn "$ROLE_ARN")
 
-echo "ASSUMED SESSION INFORMATION:"
-echo "$cred" | jq .
+echo "ASSUMED SESSION TOKEN EXPIRATION:"
+echo "$cred" | jq '.Expiration'
 
 export AWS_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId | xargs)
 export AWS_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey | xargs)
 export AWS_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken | xargs)
+export AWS_ACCOUNT_NUMBER=$AWS_ACCOUNT_NUMBER
+export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
 
-echo $(aws sts get-caller-identity)|jq .
+echo $(aws sts get-caller-identity) | jq .
