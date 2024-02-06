@@ -6,6 +6,8 @@
 
 # see https://github.com/aws/rolesanywhere-credential-helper?tab=readme-ov-file#credential-process for more info
 
+unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER AWS_USERNAME AWS_IAM_ROLE
+
 echo -e "Starting script with $# arguments: $@\n"
 
 # Check if pkcs11-tool and aws_signing_helper are installed
@@ -101,11 +103,14 @@ cred=$(aws_signing_helper \
   --cert-selector "Key=x509Serial,Value=$PIV_CERT_SERIAL" \
   --trust-anchor-arn "$TRUST_ANCHOR_ARN" \
   --profile-arn "$PROFILE_ARN" \
-  --role-arn "$ROLE_ARN")
+  --role-arn "$ROLE_ARN" \ 
+  --session-duration 3599)
 
 echo "ASSUMED SESSION INFORMATION:"
 echo "$cred" | jq .
 
-export AWS_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId)
-export AWS_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey)
-export AWS_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken)
+export AWS_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId | xargs)
+export AWS_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey | xargs)
+export AWS_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken | xargs)
+
+echo $(aws sts get-caller-identity)|jq .
