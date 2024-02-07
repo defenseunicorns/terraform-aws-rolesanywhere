@@ -8,33 +8,31 @@
 
 echo -e "Starting script with $# arguments: $@\n"
 
-# Check if pkcs11-tool and aws_signing_helper are installed
+# Check if pkcs11-tool pkcs15-tool and aws_signing_helper are installed
 # Declare an array of binaries to check
-#binaries=("pkcs11-tool" "aws_signing_helper")
+binaries=("pkcs11-tool" "pkcs15-tool" "aws_signing_helper")
 
 # Loop through each binary and check if it's installed
-# for binary in "${binaries[@]}"; do
-#   if ! command -v "$binary" &> /dev/null; then
-#     echo "Error: $binary isn't installed."
-#   fi
-# done
+for binary in "${binaries[@]}"; do
+  if ! command -v "$binary" &> /dev/null; then
+    echo "Error: $binary isn't installed."
+  fi
+ done
 
 # script help message
 function help {
   cat <<EOF
 usage: $(basename "$0") <arguments>
 -h|--help                   - print this help message and exit
---trust-anchor-arn          - the ARN of the trust anchor used to authenticate matching the piv cert issuer
---profile-arn               - the ARN of the rolesanywhere profile that provides a mapping for the specified role
---role-arn                  - the ARN of the role to obtain temporary credentials for
+--card-tool                 - the smart card reading tool to use: pkcs11-tool or pkcs15-tool
 EOF
 }
 
 # if "$#" is 0, then print help and exit
-# if [ "$#" -eq 0 ]; then
-#   help
-#   exit 1
-# fi
+if [ "$#" -eq 0 ]; then
+  help
+  exit 1
+fi
 
 # PARAMS=""
 # while (("$#")); do
@@ -135,6 +133,6 @@ cred=$(aws_signing_helper \
 echo "ASSUMED SESSION INFORMATION:"
 echo "$cred" | jq .
 
-# export JAT_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId)
-# export JAT_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey)
-# export JAT_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken)
+# export AWS_ACCESS_KEY_ID=$(echo $cred | jq -r .AccessKeyId)
+# export AWS_SECRET_ACCESS_KEY=$(echo $cred | jq -r .SecretAccessKey)
+# export AWS_SESSION_TOKEN=$(echo $cred | jq -r .SessionToken)
