@@ -19,7 +19,7 @@ pkcs11-tool --list-objects --type cert | grep -B 1 -A 3 "Certificate for PIV Aut
 pkcs11-tool --read-object --type cert --id $ID_FROM_PIV_CERT_OUTPUT | openssl x509 -inform DER  -text -noout -issuer | grep 'Issuer:'
 
 # fetch creds using rolesanywhere and your smartcard
-./aws_signing_helper credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME
+./aws_signing_helper credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME --aws-account-number $AWS_ACCOUNT_NUMBER --aws-default-region $AWS_DEFAULT_REGION
 
 ```
 
@@ -31,7 +31,7 @@ You can hardcode everything in here:
 ```ini
 [profile ra-cac]
 region=us-gov-west-1
-credential_process=credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME
+credential_process=credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME --aws-account-number $AWS_ACCOUNT_NUMBER --aws-default-region $AWS_DEFAULT_REGION
 ```
 
 Then set profile via `export AWS_PROFILE=ra-cac` or `--profile ra-cac` on aws cli commands
@@ -45,7 +45,9 @@ These creds will expire after 1 hour.
 source ./aws_login_rolesanywhere.sh \
   --trust-anchor-arn "$ARN_OF_MATCHING_PIV_CERT_ISSUER_CA" \
   --profile-arn "$ARN_OF_RA_PROFILE" \
-  --role-arn "$ARN_OF_ROLE_TO_ASSUME"
+  --role-arn "$ARN_OF_ROLE_TO_ASSUME" \
+  --aws-account-number $AWS_ACCOUNT_NUMBER \
+  --aws-default-region $AWS_DEFAULT_REGION
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
