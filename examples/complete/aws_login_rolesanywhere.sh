@@ -25,6 +25,7 @@ function help {
 usage: $(basename "$0") <arguments>
 -h|--help                   - print this help message and exit
 --card-tool                 - the smart card reading tool to use: pkcs11-tool or pkcs15-tool
+--prof-role                 - the profile/role pattern to assume: for a contains e.g. "priv-users" tf creates a prefix & suffix
 EOF
 }
 
@@ -41,6 +42,17 @@ while (("$#")); do
   --card-tool)
     if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
     CARD_TOOL=$2
+    shift 2
+    else
+      echo "Error: Argument for $1 is missing" >&2
+      help
+      exit 1
+    fi
+    ;;
+  # profile / role pattern to assume
+  --prof-role)
+    if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
+    PROF_ROLE=$2
     shift 2
     else
       echo "Error: Argument for $1 is missing" >&2
@@ -76,13 +88,14 @@ echo "Cert Serial: ${PIV_CERT_SERIAL}"
 sleep 5
 # Get the Cert Issuer/Name to query for the arn's in AWS
 issuer=$($CARD_TOOL --read-certificate ${PIV_CERT_ID} | openssl x509 -text -noout | grep 'Issuer:')
+#issuer="        Issuer: C=US, O=U.S. Government, OU=DoD, OU=PKI, CN=DOD ID CA-65"
 cert_name=$(echo "${issuer}" | awk -F ', ' '{for(i=1; i<=NF; i++) if ($i ~ /^CN=/) print substr($i, 4)}' | awk '{ gsub(/[ -]/, "_"); print }')
-echo "Cert: ${cert_name}"
+echo "Cert Name: ${cert_name}"
 
 # Query AWS for the necessary arn's
 cac_ta_arn=$(aws rolesanywhere list-trust-anchors --query "trustAnchors[?name.contains(@,'${cert_name}')].trustAnchorArn" --output text)
-cac_prof_arn=$(aws rolesanywhere list-profiles --query "profiles[?name.contains(@,'-priv-users-')].profileArn" --output text)
-cac_role_arn=$(aws iam list-roles --query "Roles[?RoleName.contains(@,'-priv-users-')].Arn" --output text)
+cac_prof_arn=$(aws rolesanywhere list-profiles --query "profiles[?name.contains(@,'${PROF_ROLE}-')].profileArn" --output text)
+cac_role_arn=$(aws iam list-roles --query "Roles[?RoleName.contains(@,'${PROF_ROLE}')].Arn" --output text)
 echo "CAC Trust arn: ${cac_ta_arn}"
 echo "CAC Profile arn: ${cac_prof_arn}"
 echo "CAC Role: ${cac_role_arn}"
