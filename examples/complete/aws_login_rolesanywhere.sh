@@ -6,7 +6,8 @@
 
 # see https://github.com/aws/rolesanywhere-credential-helper?tab=readme-ov-file#credential-process for more info
 
-unset AWS_PROFILE AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER AWS_USERNAME AWS_IAM_ROLE
+# Only clear the env that is being reset below
+unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER
 
 echo -e "Starting script with $# arguments: $@\n"
 
@@ -74,28 +75,6 @@ while (("$#")); do
       exit 1
     fi
     ;;
-    # aws account number
-  --aws-account-number)
-    if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
-    AWS_ACCOUNT_NUMBER=$2
-    shift 2
-    else
-      echo "Error: Argument for $1 is missing" >&2
-      help
-      exit 1
-    fi
-    ;;
-    # aws default region
-  --aws-default-region)
-    if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
-    AWS_DEFAULT_REGION=$2
-    shift 2
-    else
-      echo "Error: Argument for $1 is missing" >&2
-      help
-      exit 1
-    fi
-    ;;
   # help message
   -h | --help)
     help
@@ -115,10 +94,12 @@ while (("$#")); do
   esac
 done
 
+AWS_ACCOUNT_NUMBER=$(echo "${PROFILE_ARN}" | awk -F':' '{print $5}')
+AWS_DEFAULT_REGION=$(echo "${PROFILE_ARN}" | awk -F':' '{print $4}')
 
 # get user's piv cert information
 PIV_CERT_INFO=$(pkcs11-tool --list-objects --type cert | grep -B 1 -A 3 "Certificate for PIV Authentication")
-PIV_CERT_SERIAL=${PIV_CERT_SERIAL:-$(echo "$PIV_CERT_INFO" | grep "serial:" | awk '{print $2}')}
+PIV_CERT_SERIAL=$(echo "${PIV_CERT_INFO}" | awk '/serial:/ {print $2}')
 
 cred=$(aws_signing_helper \
   credential-process \
