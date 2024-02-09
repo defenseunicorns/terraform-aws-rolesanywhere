@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.4...v0.0.5) (2024-02-09)
+
+
+### Bug Fixes
+
+* update to eliminate the need to pass account & region in script ([#18](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/18)) ([14e49bd](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/14e49bdf795cbba8e3fd6097a749547f3bd2ad12))
+
 ## [0.0.4](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.3...v0.0.4) (2024-02-08)
 
 
