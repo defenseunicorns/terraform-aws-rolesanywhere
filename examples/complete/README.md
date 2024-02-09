@@ -3,6 +3,7 @@
 This example deploys AWS rolesanywhere for a pattern of using it DoD cac authentication.
 
 Once this terraform is deployed, you can configure an aws profile to use rolesanywhere by doing the following:
+
 ```bash
 # download aws signing helper and put in path somewhere, see docs here:
 # https://docs.aws.amazon.com/rolesanywhere/latest/userguide/credential-helper.html
@@ -19,7 +20,7 @@ pkcs11-tool --list-objects --type cert | grep -B 1 -A 3 "Certificate for PIV Aut
 pkcs11-tool --read-object --type cert --id $ID_FROM_PIV_CERT_OUTPUT | openssl x509 -inform DER  -text -noout -issuer | grep 'Issuer:'
 
 # fetch creds using rolesanywhere and your smartcard
-./aws_signing_helper credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME --aws-account-number $AWS_ACCOUNT_NUMBER --aws-default-region $AWS_DEFAULT_REGION
+./aws_signing_helper credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME
 
 ```
 
@@ -31,7 +32,7 @@ You can hardcode everything in here:
 ```ini
 [profile ra-cac]
 region=us-gov-west-1
-credential_process=credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME --aws-account-number $AWS_ACCOUNT_NUMBER --aws-default-region $AWS_DEFAULT_REGION
+credential_process=credential-process --cert-selector 'Key=x509Serial,Value=$PIV_CERT_SERIAL' --trust-anchor-arn $ARN_OF_MATCHING_PIV_CERT_ISSUER_CA --profile-arn $ARN_OF_RA_PROFILE --role-arn $ARN_OF_ROLE_TO_ASSUME
 ```
 
 Then set profile via `export AWS_PROFILE=ra-cac` or `--profile ra-cac` on aws cli commands
@@ -45,9 +46,7 @@ These creds will expire after 1 hour.
 source ./aws_login_rolesanywhere.sh \
   --trust-anchor-arn "$ARN_OF_MATCHING_PIV_CERT_ISSUER_CA" \
   --profile-arn "$ARN_OF_RA_PROFILE" \
-  --role-arn "$ARN_OF_ROLE_TO_ASSUME" \
-  --aws-account-number $AWS_ACCOUNT_NUMBER \
-  --aws-default-region $AWS_DEFAULT_REGION
+  --role-arn "$ARN_OF_ROLE_TO_ASSUME"
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
