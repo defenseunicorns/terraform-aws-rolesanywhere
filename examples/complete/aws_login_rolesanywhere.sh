@@ -6,9 +6,8 @@
 
 # see https://github.com/aws/rolesanywhere-credential-helper?tab=readme-ov-file#credential-process for more info
 
-#unset AWS_PROFILE AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER AWS_USERNAME AWS_IAM_ROLE
 # Only clear the env that is being reset below
-unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER 
+unset AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID AWS_DEFAULT_REGION AWS_ACCOUNT_NUMBER
 
 echo -e "Starting script with $# arguments: $@\n"
 
