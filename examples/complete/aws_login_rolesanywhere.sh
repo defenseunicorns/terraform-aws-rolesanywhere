@@ -13,7 +13,7 @@ echo -e "Starting script with $# arguments: $@\n"
 
 # Check if pkcs11-tool and aws_signing_helper are installed
 # Declare an array of binaries to check
-binaries=("pkcs11-tool" "aws_signing_helper")
+binaries=("aws_signing_helper" "p11tool")
 
 # Loop through each binary and check if it's installed
 for binary in "${binaries[@]}"; do
@@ -97,13 +97,14 @@ done
 AWS_ACCOUNT_NUMBER=$(echo "${PROFILE_ARN}" | awk -F':' '{print $5}')
 AWS_DEFAULT_REGION=$(echo "${PROFILE_ARN}" | awk -F':' '{print $4}')
 
-# get user's piv cert information
-PIV_CERT_INFO=$(pkcs11-tool --list-objects --type cert | grep -B 1 -A 3 "Certificate for PIV Authentication")
-PIV_CERT_SERIAL=$(echo "${PIV_CERT_INFO}" | awk '/serial:/ {print $2}')
+# get user's piv cert pkcs11 URI
+PIV_URL=$(p11tool --list-all-certs | grep "piv")
+CERT_OUT=$(p11tool --list-all-certs $PIV_URL)
+CERT_URL=$(echo $CERT_OUT | sed -nr "s/.*URL: (.*Certificate\%20for\%20PIV\%20Authentication;type=cert).*$/\1/p")
 
 cred=$(aws_signing_helper \
   credential-process \
-  --cert-selector "Key=x509Serial,Value=$PIV_CERT_SERIAL" \
+  --certificate "$CERT_URL" \
   --trust-anchor-arn "$TRUST_ANCHOR_ARN" \
   --profile-arn "$PROFILE_ARN" \
   --role-arn "$ROLE_ARN")
