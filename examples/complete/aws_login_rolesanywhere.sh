@@ -13,7 +13,7 @@ echo -e "Starting script with $# arguments: $@\n"
 
 # Check if pkcs11-tool and aws_signing_helper are installed
 # Declare an array of binaries to check
-binaries=("aws_signing_helper" "p11tool")
+binaries=("pkcs11-tool" "aws_signing_helper")
 
 # Loop through each binary and check if it's installed
 for binary in "${binaries[@]}"; do
