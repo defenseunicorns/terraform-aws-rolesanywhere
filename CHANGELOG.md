@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.6](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.5...v0.0.6) (2024-03-25)
+
+
+### Miscellaneous Chores
+
+* **deps:** update all dependencies ([#22](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/22)) ([158c610](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/158c610f345fca29cae44efd6d8288a7484e1346))
+* **deps:** update all dependencies ([#25](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/25)) ([0c6e5c4](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/0c6e5c4673528ea3afbb218b927c838931d13f60))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v37.252.1 ([#24](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/24)) ([52b37e3](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/52b37e33b178f1ae85f9155265f826dc1e984bc1))
+
 ## [0.0.5](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.4...v0.0.5) (2024-02-09)
 
 
