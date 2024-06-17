@@ -7,7 +7,7 @@ https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html
 
 # iam-rolesanywhere-trust-anchors
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGINNING OF PRE-COMMIT-OPENTOFU DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -45,4 +45,4 @@ No modules.
 | <a name="output_trust_anchor_arns"></a> [trust\_anchor\_arns](#output\_trust\_anchor\_arns) | n/a |
 | <a name="output_trust_anchor_names"></a> [trust\_anchor\_names](#output\_trust\_anchor\_names) | n/a |
 | <a name="output_trust_anchors"></a> [trust\_anchors](#output\_trust\_anchors) | n/a |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END OF PRE-COMMIT-OPENTOFU DOCS HOOK -->

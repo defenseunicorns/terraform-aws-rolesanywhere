@@ -49,7 +49,7 @@ source ./aws_login_rolesanywhere.sh \
   --role-arn "$ARN_OF_ROLE_TO_ASSUME"
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGINNING OF PRE-COMMIT-OPENTOFU DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -108,4 +108,4 @@ source ./aws_login_rolesanywhere.sh \
 | <a name="output_priv_iam_role_arn_to_assume"></a> [priv\_iam\_role\_arn\_to\_assume](#output\_priv\_iam\_role\_arn\_to\_assume) | arn of the role to assume for privileged users |
 | <a name="output_priv_rolesanywhere_profile_arn"></a> [priv\_rolesanywhere\_profile\_arn](#output\_priv\_rolesanywhere\_profile\_arn) | arn of the rolesanywhere profile to assume for privileged users |
 | <a name="output_trust_anchors"></a> [trust\_anchors](#output\_trust\_anchors) | use the arn of the CA that matches issuer of the user's PIV cert |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END OF PRE-COMMIT-OPENTOFU DOCS HOOK -->
