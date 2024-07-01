@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.0.6](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.5...v0.0.6) (2024-07-01)
+
+
+### Miscellaneous Chores
+
+* **deps:** update all dependencies ([#22](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/22)) ([158c610](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/158c610f345fca29cae44efd6d8288a7484e1346))
+* **deps:** update all dependencies ([#25](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/25)) ([0c6e5c4](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/0c6e5c4673528ea3afbb218b927c838931d13f60))
+* **deps:** update all dependencies ([#26](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/26)) ([78c7c2c](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/78c7c2ca02ae4ad5cb47a2b5c31d42fc90b9fef9))
+* **deps:** update all dependencies ([#27](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/27)) ([c625f9d](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/c625f9d9101c3d38698832ed56545e2bcde5bd27))
+* **deps:** update all dependencies ([#29](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/29)) ([8f1e607](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/8f1e607d6c4999f0ea65f85dc78935fac12b6309))
+* **deps:** update all dependencies ([#30](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/30)) ([fa8ff8a](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/fa8ff8aabe14f8bb9b36e954899d5081510094a0))
+* **deps:** update all dependencies ([#32](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/32)) ([1e08a8b](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/1e08a8b7f7e2624c2a2415cc52e996bebb73e47a))
+* **deps:** update all dependencies ([#34](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/34)) ([ad8209d](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/ad8209db48ba5150fedb5b82abcaa22e5919ba25))
+* **deps:** update all dependencies ([#35](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/35)) ([b93d84a](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/b93d84a6127ff3e888f87f39335309a03cac2e73))
+* **deps:** update all dependencies ([#36](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/36)) ([3d62ee6](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/3d62ee61d7162fe7d882677ff38f3e122fda6cc2))
+* **deps:** update all dependencies ([#37](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/37)) ([2805724](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/28057240f736eb603ec3c571fba29c1ff211a689))
+* **deps:** update all dependencies ([#38](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/38)) ([1aa7df7](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/1aa7df78a405b0eb6b93a2112dd1eb132a2757fa))
+* **deps:** update all dependencies ([#39](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/39)) ([be5e202](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/be5e202099b2abbef08b3abf77a12eb5ace94d60))
+* **deps:** update all dependencies ([#41](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/41)) ([f4bd888](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/f4bd8880face9374d7ab90f0c33cced38b7537da))
+* **deps:** update all dependencies ([#42](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/42)) ([f99d886](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/f99d886b4b8f31001f5b452bd4b55ad9a3277409))
+* **deps:** update module golang.org/x/net to v0.23.0 [security] ([#28](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/28)) ([ae436c5](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/ae436c599803e1d4dd37e9d26e8523402f6dcfb5))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v37.252.1 ([#24](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/24)) ([52b37e3](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/52b37e33b178f1ae85f9155265f826dc1e984bc1))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v37.316.2 ([#31](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/31)) ([a941b16](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/a941b161fe14c50471283eb765af255f8b75dda2))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v37.327.2 ([#33](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/33)) ([df7ea1b](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/df7ea1b7a740f3f6b8e821879e836c32af7a2e20))
+* **deps:** update pre-commit hook renovatebot/pre-commit-hooks to v37.421.5 ([#43](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/43)) ([c6ecc5f](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/c6ecc5fb62c6865955dae15689dec6a7e8bae066))
+* tofu migration ([#40](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/issues/40)) ([8c6c3c3](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/commit/8c6c3c39660c47aa3d664bc882ea65a78ac4cb95))
+
 ## [0.0.5](https://github.com/defenseunicorns/terraform-aws-rolesanywhere/compare/v0.0.4...v0.0.5) (2024-02-09)
 
 
