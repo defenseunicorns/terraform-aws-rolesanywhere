@@ -96,7 +96,7 @@ source ./aws_login_rolesanywhere.sh \
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The prefix to use when naming all resources | `string` | `"ci"` | no |
 | <a name="input_priv_role_name"></a> [priv\_role\_name](#input\_priv\_role\_name) | The name of the rolesanywhere profile to create | `string` | `"priv-users"` | no |
 | <a name="input_priv_rolesanywhere_profile_name"></a> [priv\_rolesanywhere\_profile\_name](#input\_priv\_rolesanywhere\_profile\_name) | The name of the rolesanywhere profile to create | `string` | `"priv-users"` | no |
-| <a name="input_priv_users"></a> [priv\_users](#input\_priv\_users) | list of users to add to the admin role | `list(string)` | <pre>[<br>  "junk",<br>  "not.real"<br>]</pre> | no |
+| <a name="input_priv_users"></a> [priv\_users](#input\_priv\_users) | list of users to add to the admin role | `list(string)` | <pre>[<br/>  "junk",<br/>  "not.real"<br/>]</pre> | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 

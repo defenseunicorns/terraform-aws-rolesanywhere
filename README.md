@@ -12,7 +12,7 @@ https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | <= 1.9.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | <= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.73 |
 
 ## Providers
@@ -35,7 +35,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_certificates"></a> [certificates](#input\_certificates) | certificate objects to create trust anchors for. These are expected to be in the format of data.tls\_certificate<br>see: https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate | `any` | n/a | yes |
+| <a name="input_certificates"></a> [certificates](#input\_certificates) | certificate objects to create trust anchors for. These are expected to be in the format of data.tls\_certificate<br/>see: https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate | `any` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 
 ## Outputs
